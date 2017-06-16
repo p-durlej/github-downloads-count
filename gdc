@@ -14,8 +14,6 @@ except ImportError:
     print "Installing Requests is simple with pip:\n  pip install requests"
     print "More info: http://docs.python-requests.org/en/latest/"
     exit(1)
-import cStringIO
-import json
 
 
 def dict_to_object(d):
@@ -45,7 +43,6 @@ if "GITHUB_TOKEN" in os.environ:
 if len(sys.argv) == 3:
     full_names.append(sys.argv[1] + "/" + sys.argv[2])
 else:
-    buf = cStringIO.StringIO()
     r = requests.get('https://api.github.com/users/' + sys.argv[1] + '/repos', headers=headers)
     myobj = r.json()
 
@@ -54,7 +51,6 @@ else:
 
 
 for full_name in full_names:
-    buf = cStringIO.StringIO()
     total_count = 0
     try:
         r = requests.get('https://api.github.com/repos/' + full_name + '/releases', headers=headers)
